@@ -75,13 +75,9 @@ module.exports = {
             if (m.author.bot)
             return;
 
-            if (m.content.toLowerCase() == `${client.prefix}close`) {
-
-            newChannel.send("Ticket closed.")
-            message.author.send("This ticket has been closed.")
+            if (m.content.toLowerCase() == `${client.prefix}close`) 
             return ChannelCollector.stop("Closed");
 
-            };
 
             Messages.push(`[Support] **${m.member.displayName}:** ${m.content}`)
 
@@ -108,7 +104,7 @@ module.exports = {
 
         ChannelCollector.on('end', async(collected, reason) => {
 
-            if (reason == "closed") {
+            if (reason == "Closed") {
 
                 DMCollector.stop();
 
@@ -116,7 +112,7 @@ module.exports = {
                 message.author.send("This ticket has been closed.");
 
                 await client.fs.writeFileSync(`../transcript.txt`, Messages.join("\n"));
-                Channel.send(new client.discord.MessageAttachment(client.fs.createReadStream(`../transcript.txt`)));
+                newChannel.send(new client.discord.MessageAttachment(client.fs.createReadStream(`../transcript.txt`)));
                 return client.threads.delete(message.author.id);
 
                 };
