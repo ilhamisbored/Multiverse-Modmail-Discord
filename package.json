@@ -1,0 +1,17 @@
+{
+  "name": "MultiverseModmail",
+  "version": "1.0.5",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^12.2.0",
+    "ms": "^2.1.2",
+    "pm2": "^4.4.0"
+  }
+}
