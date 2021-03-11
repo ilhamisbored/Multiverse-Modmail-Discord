@@ -1,2 +1,2 @@
 # Multiverse-Modmail
-Modmail bot for Resurrected Multiverse
+Modmail bot for Ilham's Universe
