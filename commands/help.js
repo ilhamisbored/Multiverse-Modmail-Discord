@@ -18,7 +18,7 @@ module.exports = {
         await msg.edit(client.embed({
 
             title: 'Here are my commands:',
-            color: "36b9ec",
+            color: "65aaf0",
             description: "m.help\nm.ping\nm.modmail (creates a new ticket)",
 
         }, message));

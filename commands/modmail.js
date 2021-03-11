@@ -54,8 +54,8 @@ module.exports = {
 
         Channel.send(client.embed({
 
-            color: "36b9ec",
-            description: `The member ${message.author.tag} (ID: ${message.author.id}) is creating a modmail ticket. Created in ${newChannel}.`
+            color: "65aaf0",
+            description: `${message.author.tag} created a new ticket in ${newChannel}..`
 
                 }, message
             ),
@@ -67,7 +67,7 @@ module.exports = {
         );
 
         const ChannelCollector = newChannel.createMessageCollector((msg) => msg.channel.id == newChannel.id);
-        const DMCollector = await message.author.send("**This is the beginning of your conversation**").then(async(msg) => await msg.channel.createMessageCollector((msg) => msg.author.id == message.author.id));
+        const DMCollector = await message.author.send("**_This is the beginning of your conversation_**").then(async(msg) => await msg.channel.createMessageCollector((msg) => msg.author.id == message.author.id));
            
 
         ChannelCollector.on('collect', async(m) => {
@@ -79,7 +79,7 @@ module.exports = {
             return ChannelCollector.stop("Closed");
 
 
-            Messages.push(`[Support] **${m.member.displayName}:** ${m.content}`)
+            Messages.push(`[Support] ${m.member.displayName}: ${m.content}`)
 
             message.author.send(`**${m.member.displayName}:** ${m.content}`)
 
@@ -97,17 +97,18 @@ module.exports = {
 
             newChannel.send(`**${m.author.username}:** ${m.content}`)
 
-            Messages.push(`**${m.author.username}:** ${m.content}`)
+            Messages.push(`${m.author.username}: ${m.content}`)
 
             },
         );
 
         ChannelCollector.on('end', async(collected, reason) => {
 
-            if (reason == "Closed") {
+                if (reason == "Closed") {
 
                 DMCollector.stop();
-
+                
+                newChannel.send("This ticket has been closed.");
                 newChannel.send("Generating transcript...");
                 message.author.send("This ticket has been closed.");
 

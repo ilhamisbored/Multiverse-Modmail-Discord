@@ -20,7 +20,7 @@ module.exports = {
 
         }
 
-        await message.channel.send('Reloading myself...\n\n\n\nTurning on......\n\n\n\n\nMultiverse Modmail has logged in!')
+        await message.channel.send('Reloading myself....')
         
         message.delete()
         process.exit();

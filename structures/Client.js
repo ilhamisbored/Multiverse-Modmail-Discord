@@ -60,11 +60,12 @@ class ModmailClient extends Client {
 
         this.on('ready',()=>{
 
-            const responses = ["new tickets || m.help"]
+            const responses = ["new mails! || m.help"]
             const num = Math.floor(Math.random() * responses.length)
             this.user.setActivity(responses[num], {
             
-               type: "LISTENING"
+               type: "WATCHING",
+               
             
               },
         )});
@@ -72,11 +73,11 @@ class ModmailClient extends Client {
 
         this.on('message', async(message) => {
 
-            if(message.author.bot || !message.guild || !message.content.toLowerCase().startsWith(this.prefix)) return;
+            if (message.author.bot || !message.guild || !message.content.toLowerCase().startsWith(this.prefix)) return;
             const args = message.content.slice(this.prefix.length).trim().split(/ +/g);
             const cmd = args.shift().toLowerCase();
             const command = this.getCommand(cmd);
-            if(command) return command.run(this, message, args).catch(console.error);
+            if (command) return command.run(this, message, args).catch(console.error);
 
             },
         );
@@ -90,3 +91,4 @@ class ModmailClient extends Client {
 };
 
 module.exports = ModmailClient;
+
