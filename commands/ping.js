@@ -27,7 +27,7 @@ module.exports = {
 
             title: 'PONG!',
             color: "65aaf0",
-            description: `**API Latency:** ${client.ws.ping} MS\n\n**Latency Latency:** ${msg.createdAt - message.createdAt} MS\n\n**Uptime:** ${uptime}.`
+            description: `**API Latency:** ${client.ws.ping} MS\n\n**Latency:** ${msg.createdAt - message.createdAt} MS\n\n**Uptime:** ${uptime}.`
 
         }, message));
         
@@ -35,3 +35,4 @@ module.exports = {
 
     },
 };
+

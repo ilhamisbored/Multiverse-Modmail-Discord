@@ -13,13 +13,13 @@ module.exports = {
 
     run: async(client, message, args) => {
 
-        if (client.threads.has(`${message.author.id}`)) 
+        if (client.threads.has(`${message.author.id}`))
         return message.channel.send("You already have a ticket!");
 
         const Channel = message.guild.channels.cache.find(ch => ch.name.toLowerCase().includes("modmail"));
 
-        if (!Channel) 
-        return message.channel.send("There's no modmail channel!");
+        if (!Channel)
+        return message.channel.send("There's no modmail logs channel channel!");
 
         const Messages = [];
 
@@ -55,7 +55,8 @@ module.exports = {
         Channel.send(client.embed({
 
             color: "65aaf0",
-            description: `${message.author.tag} created a new ticket in ${newChannel}..`
+	    title: "New ticket generated",
+            description: `${message.author.tag} created a new ticket in ${newChannel}.`
 
                 }, message
             ),
@@ -67,8 +68,8 @@ module.exports = {
         );
 
         const ChannelCollector = newChannel.createMessageCollector((msg) => msg.channel.id == newChannel.id);
-        const DMCollector = await message.author.send("**_This is the beginning of your conversation_**").then(async(msg) => await msg.channel.createMessageCollector((msg) => msg.author.id == message.author.id));
-           
+        const DMCollector = await message.author.send("**-This is the beginning of your conversation-**").then(async(msg) => await msg.channel.createMessageCollector((msg) => msg.author.id == message.author.id));
+
 
         ChannelCollector.on('collect', async(m) => {
 
@@ -79,7 +80,7 @@ module.exports = {
             return ChannelCollector.stop("Closed");
 
 
-            Messages.push(`[Support] ${m.member.displayName}: ${m.content}`)
+            Messages.push(`**[Support] ${m.member.displayName}:** ${m.content}`)
 
             message.author.send(`**${m.member.displayName}:** ${m.content}`)
 
@@ -93,7 +94,7 @@ module.exports = {
             return;
 
             if (m.content.toLowerCase() == `${client.prefix}close`) 
-            return message.author.send(`You can't use this command!`)
+            return message.author.send(`Only staff members can use this command!`)
 
             newChannel.send(`**${m.author.username}:** ${m.content}`)
 
@@ -107,13 +108,13 @@ module.exports = {
                 if (reason == "Closed") {
 
                 DMCollector.stop();
-                
+
                 newChannel.send("This ticket has been closed.");
                 newChannel.send("Generating transcript...");
                 message.author.send("This ticket has been closed.");
 
-                await client.fs.writeFileSync(`../transcript.txt`, Messages.join("\n"));
-                newChannel.send(new client.discord.MessageAttachment(client.fs.createReadStream(`../transcript.txt`)));
+                await client.fs.writeFileSync(`../log.txt`, Messages.join("\n"));
+                newChannel.send(new client.discord.MessageAttachment(client.fs.createReadStream(`../log.txt`)));
                 return client.threads.delete(message.author.id);
 
                 };
@@ -121,3 +122,4 @@ module.exports = {
         );
     },
 };
+

@@ -70,6 +70,7 @@ class ModmailClient extends Client {
               },
         )});
 
+	
 
         this.on('message', async(message) => {
 
@@ -91,4 +92,5 @@ class ModmailClient extends Client {
 };
 
 module.exports = ModmailClient;
+
 
