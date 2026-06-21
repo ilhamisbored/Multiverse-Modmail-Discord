@@ -1,2 +1,2 @@
 # Multiverse-Modmail
-Modmail bot for Ilham's Universe
+Modmail bot for private Discord Server.
